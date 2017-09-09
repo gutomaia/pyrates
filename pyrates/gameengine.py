@@ -18,7 +18,7 @@ class SceneBase(object):
         except Exception, e:
             pass
 
-    def update(self):
+    def update(self, deltaTime):
         pass
 
     def render(self, screen):
@@ -36,19 +36,19 @@ class DisplayScene(PygameDisplay):
     def __init__(self, parent, ID, starting_scene=None):
         super(DisplayScene, self).__init__(parent, ID)
         if not starting_scene:
-            self.active_scene = PirateBlock()
+            self.active_scene = TitleScene()
         else:
             self.active_scene = starting_scene
 
-    def pygame_redraw(self):
-        self.active_scene.update()
+    def pygame_redraw(self, deltaTime):
+        self.active_scene.update(deltaTime)
         self.active_scene.render(self.screen)
         self.active_scene = self.active_scene.next
 
 
 class TitleScene(SceneBase):
 
-    def update(self):
+    def update(self, deltaTime):
         pass
 
     def render(self, screen):
@@ -65,7 +65,7 @@ class PirateBlock(SceneBase):
     def update_context(self, context):
         pass
 
-    def update(self):
+    def update(self, deltaTime):
         pass
 
     def render(self, screen):

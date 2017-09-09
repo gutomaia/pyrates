@@ -35,7 +35,7 @@ class PygameDisplay(wx.Window):
             self.screen = pygame.Surface(self.size, 0, 32)
             self.size_dirty = False
 
-        self.pygame_redraw()
+        self.pygame_redraw(self.timer.GetInterval())
 
         s = pygame.image.tostring(self.screen, 'RGB')  # Convert the surface to an RGB string
         img = wx.ImageFromData(self.size[0], self.size[1], s)  # Load this string into a wx image
@@ -44,7 +44,7 @@ class PygameDisplay(wx.Window):
         dc.DrawBitmap(bmp, 0, 0, False)  # Blit the bitmap image to the display
         del dc
 
-    def pygame_redraw(self):
+    def pygame_redraw(self, deltaTime):
         self.screen.fill((0,0,0))
         cur = 0
 
