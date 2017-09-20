@@ -163,7 +163,7 @@ class Frame(wx.Frame):
         self.Layout()
 
     def Update(self, event):
-        self.curframe += 1
+        pass
         # self.statusbar.SetStatusText("Frame %i" % self.curframe, 2)
 
     def OnScroll(self, event):

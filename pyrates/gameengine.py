@@ -11,12 +11,12 @@ class SceneBase(object):
 
     def input_code(self, source):
         try:
-            compiled = compile(source, '<string>', 'exec')
-            exec(compiled, self.context)
+            compiled = compile(source, '<string>', 'exec') # gives syntax error
+            exec(compiled, self.context) # gives generic exceptions
         except SyntaxError, e:
-            print 'syntax error'
+            print 'syntax error', e
         except Exception, e:
-            pass
+            print 'exception', e
 
     def update(self, deltaTime):
         pass
@@ -35,8 +35,13 @@ class DisplayScene(PygameDisplay):
 
     def __init__(self, parent, ID, starting_scene=None):
         super(DisplayScene, self).__init__(parent, ID)
+
+        sys.path.insert(0, 'challenges')
+        from spine_demo.challenge import SpineScene
+
+
         if not starting_scene:
-            self.active_scene = TitleScene()
+            self.active_scene = PirateBlock()
         else:
             self.active_scene = starting_scene
 
@@ -44,15 +49,6 @@ class DisplayScene(PygameDisplay):
         self.active_scene.update(deltaTime)
         self.active_scene.render(self.screen)
         self.active_scene = self.active_scene.next
-
-
-class TitleScene(SceneBase):
-
-    def update(self, deltaTime):
-        pass
-
-    def render(self, screen):
-        screen.fill((255, 0, 0))
 
 
 class PirateBlock(SceneBase):
