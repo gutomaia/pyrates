@@ -36,9 +36,6 @@ class DisplayScene(PygameDisplay):
     def __init__(self, parent, ID, starting_scene=None):
         super(DisplayScene, self).__init__(parent, ID)
 
-        sys.path.insert(0, 'challenges')
-        from spine_demo.challenge import SpineScene
-
 
         if not starting_scene:
             self.active_scene = PirateBlock()
